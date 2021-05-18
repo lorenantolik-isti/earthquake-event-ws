@@ -22,19 +22,19 @@ BEGIN
   DECLARE result INT(1) DEFAULT 0;
   DECLARE y_intercept DECIMAL(9,6);
 
-  SET pX = X(p);
-  SET pY = Y(p);
-  SET ls = ExteriorRing(poly);
-  SET poly2 = EndPoint(ls);
-  SET poly2X = X(poly2);
-  SET poly2Y = Y(poly2);
-  SET n = NumPoints(ls);
+  SET pX = ST_X(p);
+  SET pY = ST_Y(p);
+  SET ls = ST_ExteriorRing(poly);
+  SET poly2 = ST_EndPoint(ls);
+  SET poly2X = ST_X(poly2);
+  SET poly2Y = ST_Y(poly2);
+  SET n = ST_NumPoints(ls);
 
   -- this is the infinite ray test, drawn straight down instead of to the right
   WHILE i < n DO
-    SET poly1 = PointN(ls, (i+1));
-    SET poly1X = X(poly1);
-    SET poly1Y = Y(poly1);
+    SET poly1 = ST_PointN(ls, (i+1));
+    SET poly1X = ST_X(poly1);
+    SET poly1Y = ST_Y(poly1);
 
     IF (pX = poly1X && pY = poly1Y) THEN
       -- on end point, return true

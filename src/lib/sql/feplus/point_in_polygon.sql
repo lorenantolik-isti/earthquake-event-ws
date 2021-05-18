@@ -10,15 +10,15 @@ BEGIN
   DECLARE result INT(1) DEFAULT 0;
   DECLARE type VARCHAR(255);
 
-  SET type = GeometryType(poly);
+  SET type = ST_GeometryType(poly);
 
   IF type = 'POLYGON' THEN
     SET result = point_in_one_polygon(p, poly);
   ELSEIF type = 'MULTIPOLYGON' THEN
     -- test each sub polygon
-    SET n = NumGeometries(poly);
+    SET n = ST_NumGeometries(poly);
     WHILE i <= n DO
-      SET result = point_in_one_polygon(p, GeometryN(poly, i));
+      SET result = point_in_one_polygon(p, ST_GeometryN(poly, i));
       IF result = 1 THEN
   RETURN result;
       END IF;

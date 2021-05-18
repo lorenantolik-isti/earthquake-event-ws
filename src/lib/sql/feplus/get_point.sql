@@ -5,7 +5,7 @@ COMMENT 'Convenience method to convert lat and lon to POINT.'
 DETERMINISTIC
 BEGIN
   DECLARE result POINT;
-  SET result = GeomFromText(CONCAT('POINT(', lon, ' ', lat, ')'));
+  SET result = ST_GeomFromText(CONCAT('POINT(', lon, ' ', lat, ')'));
   RETURN result;
 END;
 //
